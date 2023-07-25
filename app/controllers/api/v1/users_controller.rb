@@ -4,7 +4,7 @@ class Api::V1::UsersController < ApplicationController
 
     if @user.save
       token = encoded_token({ user_id: @user.id })
-      render json: { user: @user, token: token }, status: :ok
+      render json: { user: @user, token: }, status: :ok
     else
       render json: { message: 'Invalid credentials' }
     end
@@ -15,7 +15,7 @@ class Api::V1::UsersController < ApplicationController
 
     if @user&.authenticate(login_params[:password])
       token = encoded_token({ user_id: @user.id })
-      render json: { user: @user, token: token }, status: :ok
+      render json: { user: @user, token: }, status: :ok
     else
       render json: { message: 'Invalid credentials' }
     end
