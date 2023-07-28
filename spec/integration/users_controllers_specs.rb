@@ -5,8 +5,8 @@ describe 'Users Api' do
     post 'Create a new user' do
       tags 'User'
       consumes 'application/json'
-      produces 'applicaton/json'
-      parameter name: :user, in: :path, schema: {
+      produces 'application/json'
+      parameter name: :user, in: :body, schema: {
         type: :object,
         properties: {
           username: { type: :string },
@@ -41,7 +41,7 @@ describe 'Users Api' do
           user: {
             id: 1,
             username: 'john doe',
-            email: '<EMAIL>',
+            email: 'john@example.com',
             password_digest: '<PASSWORD_DIGEST>',
             created_at: Time.now.to_s,
             updated_at: Time.now.to_s
@@ -49,7 +49,7 @@ describe 'Users Api' do
           token: 'some-token'
         }
 
-        let(:user) { { username: 'john doe', email: '<EMAIL>', password: '<PASSWORD>' } }
+        let(:user) { { username: 'john doe', email: 'john@example.com', password: '<PASSWORD>' } }
         run_test!
       end
 
@@ -68,7 +68,7 @@ describe 'Users Api' do
           errors: ['<ERRORS>']
         }
 
-        let(:user) { { username: 'john doe', email: '<EMAIL>', password: '<PASSWORD>' } }
+        let(:user) { { username: 'john doe', email: 'john@example.com', password: '<PASSWORD>' } }
         run_test!
       end
     end
@@ -115,7 +115,7 @@ describe 'Users Api' do
           user: {
             id: 1,
             username: 'john doe',
-            email: '<EMAIL>',
+            email: 'john@example.com',
             password_digest: '<PASSWORD_DIGEST>',
             created_at: Time.now.to_s,
             updated_at: Time.now.to_s
