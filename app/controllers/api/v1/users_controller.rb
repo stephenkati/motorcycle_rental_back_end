@@ -4,20 +4,23 @@ class Api::V1::UsersController < ApplicationController
 
     if @user.save
       token = encoded_token({ user_id: @user.id })
-      render json: { user: @user, token: }, status: :ok
+      render json: { staus: 'Success', user: @user, token: }, status: :ok
     else
-      render json: { message: 'Invalid credentials' }
+      render json: { staus: 'Error', message: 'Invalid credentials', errors: @user.errors.full_messages },
+             status: :unprocessable_entity
     end
   end
 
   def login
     @user = User.find_by(username: login_params[:username])
 
-    if @user&.authenticate(login_params[:password])
-      token = encoded_token({ user_id: @user.id })
-      render json: { user: @user, token: }, status: :ok
+    if @user.nil?
+      render json: { status: 'Error', message: 'Oops, User not found!' }, status: :unauthorized
+    elsif !@user.authenticate(login_params[:password])
+      render json: { status: 'Error', message: 'Invalid credentials' }, status: :unauthorized
     else
-      render json: { message: 'Invalid credentials' }
+      token = encoded_token({ user_id: @user.id })
+      render json: { status: 'Success', message: 'Successfully logged In', user: @user, token: }, status: :ok
     end
   end
 

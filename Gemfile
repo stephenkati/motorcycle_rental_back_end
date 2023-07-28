@@ -59,3 +59,5 @@ gem 'rubocop', '>= 1.0', '< 2.0'
 
 # rspec rails
 gem 'rspec-rails', '~> 6.0', '>= 6.0.3'
+gem 'rswag'
+gem 'simplecov', require: false
