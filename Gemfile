@@ -46,8 +46,18 @@ group :development do
   # gem "spring"
 end
 
+group :test do
+  gem 'factory_bot_rails'
+  gem 'faker'
+end
+
 # jwt
 gem 'jwt', '~> 1.5', '>= 1.5.4'
 
 # rubocop
 gem 'rubocop', '>= 1.0', '< 2.0'
+
+# rspec rails
+gem 'rspec-rails', '~> 6.0', '>= 6.0.3'
+gem 'rswag'
+gem 'simplecov', require: false
