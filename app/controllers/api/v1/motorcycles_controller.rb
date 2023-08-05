@@ -1,5 +1,4 @@
 class Api::V1::MotorcyclesController < ApplicationController
-
   def index
     @motorcycles = Motorcycle.all
 
@@ -26,7 +25,8 @@ class Api::V1::MotorcyclesController < ApplicationController
     if @motorcycle.save
       render json: { status: 'Success', message: 'Motorcycle created successfully', data: @motorcycle }, status: :ok
     else
-      render json: { status: 'Error', message: 'Failed to create motorcycle!', data: @motorcycle.errors }, status: :unprocessable_entity
+      render json: { status: 'Error', message: 'Failed to create motorcycle!', data: @motorcycle.errors },
+             status: :unprocessable_entity
     end
   end
 
@@ -36,7 +36,8 @@ class Api::V1::MotorcyclesController < ApplicationController
     if @motorcycle.update(motorcycle_params)
       render json: { status: 'Success', message: 'Motorcycle updated successfully', data: @motorcycle }, status: :ok
     else
-      render json: { status: 'Error', message: 'Failed to update motorcycle!', data: @motorcycle.errors }, status: :unprocessable_entity
+      render json: { status: 'Error', message: 'Failed to update motorcycle!', data: @motorcycle.errors },
+             status: :unprocessable_entity
     end
   end
 
@@ -46,7 +47,8 @@ class Api::V1::MotorcyclesController < ApplicationController
     if @motorcycle.destroy
       render json: { status: 'Success', message: 'Motorcycle deleted successfully', data: @motorcycle }, status: :ok
     else
-      render json: { status: 'Error', message: 'Failed to delete motorcycle!', data: @motorcycle.errors }, status: :unprocessable_entity
+      render json: { status: 'Error', message: 'Failed to delete motorcycle!', data: @motorcycle.errors },
+             status: :unprocessable_entity
     end
   end
 
