@@ -58,6 +58,7 @@ gem 'jwt', '~> 1.5', '>= 1.5.4'
 gem 'rubocop', '>= 1.0', '< 2.0'
 
 # rspec rails
+gem 'rails-controller-testing'
 gem 'rspec-rails', '~> 6.0', '>= 6.0.3'
 gem 'rswag'
 gem 'simplecov', require: false

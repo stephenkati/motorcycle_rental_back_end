@@ -4,9 +4,9 @@ class Api::V1::UsersController < ApplicationController
 
     if @user.save
       token = encoded_token({ user_id: @user.id })
-      render json: { staus: 'Success', user: @user, token: }, status: :ok
+      render json: { status: 'Success', user: @user, token: }, status: :ok
     else
-      render json: { staus: 'Error', message: 'Invalid credentials', errors: @user.errors.full_messages },
+      render json: { status: 'Error', message: 'Invalid credentials', errors: @user.errors.full_messages },
              status: :unprocessable_entity
     end
   end
@@ -23,6 +23,8 @@ class Api::V1::UsersController < ApplicationController
       render json: { status: 'Success', message: 'Successfully logged In', user: @user, token: }, status: :ok
     end
   end
+
+  private
 
   def login_params
     params.require(:user).permit(:username, :password)
