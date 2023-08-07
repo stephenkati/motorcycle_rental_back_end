@@ -3,7 +3,362 @@ openapi: 3.0.1
 info:
   title: API V1
   version: v1
-paths: {}
+paths:
+  api/v1/motorcycles:
+    get:
+      summary: A list of motorcycles
+      tags:
+      - Motorcycle
+      responses:
+        '200':
+          description: Motorcycles fetched successfully
+          content:
+            application/json:
+              examples:
+                example_0:
+                  value:
+                    status: Success
+                    message: Motorcycles fetched successfully
+                    data:
+                    - id: 1
+                      name: Honda
+                      photo: image_url
+                      purchase_price: 10000
+                      rental_price: 100
+                      description: Honda is a Japanese public multinational conglomerate
+                        corporation primarily known as a manufacturer of automobiles,
+                        motorcycles, and power equipment.
+                    - id: 2
+                      name: Yamaha
+                      photo: image_url
+                      purchase_price: 10000
+                      rental_price: 200
+                      description: Yamaha Motor Company Limited is a Japanese manufacturer
+                        of motorcycles, marine products such as boats and outboard
+                        motors, and other motorized products.
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  message:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        name:
+                          type: string
+                        photo:
+                          type: string
+                        purchase_price:
+                          type: number
+                        rental_price:
+                          type: number
+                        description:
+                          type: string
+                      required:
+                      - id
+                      - name
+                      - photo
+                      - purchase_price
+                      - rental_price
+                      - description
+                required:
+                - status
+                - message
+                - data
+    post:
+      summary: Create a new motorcycle
+      tags:
+      - Motorcycle
+      parameters: []
+      responses:
+        '200':
+          description: Motorcycle created successfully
+          content:
+            application/json:
+              examples:
+                example_0:
+                  value:
+                    status: Success
+                    message: Motorcycle created successfully
+                    data:
+                      id: 1
+                      name: Honda
+                      photo: image_url
+                      purchase_price: 10000
+                      rental_price: 100
+                      description: Honda is a Japanese public multinational conglomerate
+                        corporation primarily known as a manufacturer of automobiles,
+                        motorcycles, and power equipment.
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      name:
+                        type: string
+                      photo:
+                        type: string
+                      purchase_price:
+                        type: number
+                      rental_price:
+                        type: number
+                      description:
+                        type: string
+                    required:
+                    - id
+                    - name
+                    - photo
+                    - purchase_price
+                    - rental_price
+                    - description
+                required:
+                - status
+                - message
+                - data
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                photo:
+                  type: string
+                purchase_price:
+                  type: number
+                rental_price:
+                  type: number
+                description:
+                  type: string
+              required:
+              - name
+              - photo
+              - purchase_price
+              - rental_price
+              - description
+  api/v1/motorcycles/{id}:
+    get:
+      summary: A specific motorcycle
+      tags:
+      - Motorcycle
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Motorcycle fetched successfully
+          content:
+            application/json:
+              examples:
+                example_0:
+                  value:
+                    status: Success
+                    message: Motorcycle fetched successfully
+                    data:
+                      id: 1
+                      name: Honda
+                      photo: image_url
+                      purchase_price: 10000
+                      rental_price: 100
+                      description: Honda is a Japanese public multinational conglomerate
+                        corporation primarily known as a manufacturer of automobiles,
+                        motorcycles, and power equipment.
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      name:
+                        type: string
+                      photo:
+                        type: string
+                      purchase_price:
+                        type: number
+                      rental_price:
+                        type: number
+                      description:
+                        type: string
+                    required:
+                    - id
+                    - name
+                    - photo
+                    - purchase_price
+                    - rental_price
+                    - description
+                required:
+                - status
+                - message
+                - data
+    put:
+      summary: Update a specific motorcycle
+      tags:
+      - Motorcycle
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Motorcycle updated successfully
+          content:
+            application/json:
+              examples:
+                example_0:
+                  value:
+                    status: Success
+                    message: Motorcycle updated successfully
+                    data:
+                      id: 1
+                      name: Honda
+                      photo: image_url
+                      purchase_price: 20000
+                      rental_price: 200
+                      description: Honda is a Japanese public multinational conglomerate
+                        corporation primarily known as a manufacturer of automobiles,
+                        motorcycles, and power equipment.
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      name:
+                        type: string
+                      photo:
+                        type: string
+                      purchase_price:
+                        type: number
+                      rental_price:
+                        type: number
+                      description:
+                        type: string
+                    required:
+                    - id
+                    - name
+                    - photo
+                    - purchase_price
+                    - rental_price
+                    - description
+                required:
+                - status
+                - message
+                - data
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                photo:
+                  type: string
+                purchase_price:
+                  type: number
+                rental_price:
+                  type: number
+                description:
+                  type: string
+              required:
+              - name
+              - photo
+              - purchase_price
+              - rental_price
+              - description
+    delete:
+      summary: Delete a specific motorcycle
+      tags:
+      - Motorcycle
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Motorcycle deleted successfully
+          content:
+            application/json:
+              examples:
+                example_0:
+                  value:
+                    status: Success
+                    message: Motorcycle deleted successfully
+                    data:
+                      id: 1
+                      name: Honda
+                      photo: image_url
+                      purchase_price: 10000
+                      rental_price: 100
+                      description: Honda is a Japanese public multinational conglomerate
+                        corporation primarily known as a manufacturer of automobiles,
+                        motorcycles, and power equipment.
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  message:
+                    type: string
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      name:
+                        type: string
+                      photo:
+                        type: string
+                      purchase_price:
+                        type: number
+                      rental_price:
+                        type: number
+                      description:
+                        type: string
+                    required:
+                    - id
+                    - name
+                    - photo
+                    - purchase_price
+                    - rental_price
+                    - description
+                required:
+                - status
+                - message
+                - data
 servers:
 - url: https://{defaultHost}
   variables:
