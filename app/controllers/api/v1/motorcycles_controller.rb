@@ -11,12 +11,9 @@ class Api::V1::MotorcyclesController < ApplicationController
 
   def show
     @motorcycle = Motorcycle.find(params[:id])
-
-    if @motorcycle
-      render json: { status: 'Success', message: 'Motorcycles fetched successfully', data: @motorcycle }, status: :ok
-    else
-      render json: { status: 'Error', message: 'Failed to fetch motorcycle!' }, status: :bad_request
-    end
+    render json: { status: 'Success', message: 'Motorcycle fetched successfully', data: @motorcycle }, status: :ok
+  rescue ActiveRecord::RecordNotFound
+    render json: { status: 'Error', message: 'Failed to fetch motorcycle!', data: nil }, status: :not_found
   end
 
   def create
@@ -42,9 +39,11 @@ class Api::V1::MotorcyclesController < ApplicationController
   end
 
   def destroy
-    @motorcycle = Motorcycle.find(params[:id])
+    @motorcycle = Motorcycle.find_by(id: params[:id])
 
-    if @motorcycle.destroy
+    if @motorcycle.nil?
+      render json: { status: 'Error', message: 'Motorcycle not found!', data: nil }, status: :not_found
+    elsif @motorcycle.destroy
       render json: { status: 'Success', message: 'Motorcycle deleted successfully', data: @motorcycle }, status: :ok
     else
       render json: { status: 'Error', message: 'Failed to delete motorcycle!', data: @motorcycle.errors },
