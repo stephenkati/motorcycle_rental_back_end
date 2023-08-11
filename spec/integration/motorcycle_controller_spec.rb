@@ -1,7 +1,20 @@
 require 'swagger_helper'
 # rubocop:disable Metrics/BlockLength
 describe 'Motorcycle Api' do
-  path 'api/v1/motorcycles' do
+  let(:motorcycle_attributes) do
+    {
+      id: 1,
+      name: 'Honda',
+      photo: 'image_url',
+      purchase_price: 10_000,
+      rental_price: 100,
+      description: 'Honda is a Japanese public multinational conglomerate corporation.'
+    }
+  end
+  let(:id) { motorcycle.id }
+  let!(:motorcycle) { Motorcycle.create!(motorcycle_attributes) }
+
+  path '/api/v1/motorcycles' do
     get 'A list of motorcycles' do
       tags 'Motorcycle'
       produces 'application/json'
@@ -33,18 +46,22 @@ describe 'Motorcycle Api' do
           status: 'Success',
           message: 'Motorcycles fetched successfully',
           data: [
-            { id: 1,
+            {
+              id: 1,
               name: 'Honda',
               photo: 'image_url',
               purchase_price: 10_000,
               rental_price: 100,
-              description: 'Honda is a Japanese public multinational conglomerate corporation.' },
-            { id: 2,
+              description: 'Honda is a Japanese public multinational conglomerate corporation.'
+            },
+            {
+              id: 2,
               name: 'Yamaha',
               photo: 'image_url',
-              purchase_price: 10_000,
-              rental_price: 200,
-              description: 'Yamaha Motor Company Limited is a Japanese manufacturer of motorcycles.' }
+              purchase_price: 9500,
+              rental_price: 90,
+              description: 'Yamaha Corporation is a Japanese multinational corporation.'
+            }
           ]
         }
 
@@ -61,7 +78,7 @@ describe 'Motorcycle Api' do
     end
   end
 
-  path 'api/v1/motorcycles/{id}' do
+  path '/api/v1/motorcycles/{id}' do
     get 'A specific motorcycle' do
       tags 'Motorcycle'
       produces 'application/json'
@@ -111,7 +128,7 @@ describe 'Motorcycle Api' do
     end
   end
 
-  path 'api/v1/motorcycles' do
+  path '/api/v1/motorcycles' do
     post 'Create a new motorcycle' do
       tags 'Motorcycle'
       consumes 'application/json'
@@ -174,7 +191,7 @@ describe 'Motorcycle Api' do
     end
   end
 
-  path 'api/v1/motorcycles/{id}' do
+  path '/api/v1/motorcycles/{id}' do
     put 'Update a specific motorcycle' do
       tags 'Motorcycle'
       consumes 'application/json'
@@ -238,7 +255,7 @@ describe 'Motorcycle Api' do
     end
   end
 
-  path 'api/v1/motorcycles/{id}' do
+  path '/api/v1/motorcycles/{id}' do
     delete 'Delete a specific motorcycle' do
       tags 'Motorcycle'
       produces 'application/json'

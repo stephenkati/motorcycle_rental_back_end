@@ -50,12 +50,9 @@ class Api::V1::ReservationsController < ApplicationController
     @reservation = @user.reservations.find_by(id: params[:id])
     return render_reservation_not_found unless @reservation
 
-    if @reservation.destroy
-      render json: { status: 'Success', message: 'Reservation deleted successfully', data: @reservation }, status: :ok
-    else
-      render json: { status: 'Error', message: 'Failed to delete reservation', errors: @reservation.errors },
-             status: :unprocessable_entity
-    end
+    return unless @reservation.destroy
+
+    render json: { status: 'Success', message: 'Reservation deleted successfully', data: @reservation }, status: :ok
   end
 
   private
