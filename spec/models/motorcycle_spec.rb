@@ -63,4 +63,10 @@ RSpec.describe Motorcycle, type: :model do
       expect(motorcycle).to be_an_instance_of(Motorcycle)
     end
   end
+
+  describe 'associations' do
+    it 'should have many reservations' do
+      expect(Motorcycle.reflect_on_association(:reservations).macro).to eq(:has_many)
+    end
+  end
 end

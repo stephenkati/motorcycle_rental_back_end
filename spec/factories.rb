@@ -15,3 +15,12 @@ FactoryBot.define do
     rental_price { Faker::Number.number(digits: 4) }
   end
 end
+
+FactoryBot.define do
+  factory :reservation do
+    city { Faker::Address.city }
+    reserve_date { Faker::Date.forward(days: 23) }
+    user
+    motorcycle
+  end
+end
